@@ -20,7 +20,6 @@ final class HometimelineViewController: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupTimeLine()
         loadHomeTimeline()
     }
@@ -35,34 +34,31 @@ final class HometimelineViewController: UIViewController {
     
     /// ホームタイムラインを取得する
     private func loadHomeTimeline() {
-
-        let manager = LoginManager()
         
-        manager.execute().success { account in
+        LoginManager().execute().success { account in
             
             Account.twitter = account
-            HomeTimelineManager().fetch(count: 5).success({[weak self] (timeline) -> Void in
+            HomeTimelineManager().fetch(count: 20).success({[weak self] (timeline) -> Void in
                 
                 DispatchQueue.main.async {
                     self?.dataSource.set(tweets: timeline)
                     self?.timelineTableView.reloadData()
                 }
                 
-            }).failure({ (error, isCanceled) in
+            }).failure({[weak self] (error, _) in
                 
                 guard let error = error else {
                     return
                 }
-                
-                print(error)
+                self?.warning(message: error)
             })
             
-        }.failure { (error, isCanceled) in
+        }.failure { (error, _) in
                 
             guard let _ = error else{
                 return
             }
-            manager.transitTwitterSettings()            
+            SettingsManager().transitTwitterSettings()
         }
     }
 }
@@ -72,6 +68,8 @@ extension HometimelineViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let tweet = dataSource.tweet(index: indexPath.row)
+        print(tweet.name)
     }
 }
 

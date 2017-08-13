@@ -15,6 +15,10 @@ final class HometimeLineProvider: NSObject {
     func set(tweets: [Tweet]) {
         self.tweets = tweets
     }
+    
+    func tweet(index: Int) -> Tweet {
+        return tweets[index]
+    }
 }
 
 //MARK : - UITableViewDataSource

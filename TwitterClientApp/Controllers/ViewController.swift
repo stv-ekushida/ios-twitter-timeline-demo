@@ -13,22 +13,38 @@ final class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        canTwitter()
+        loadHomeTimeline()
     }
     
-    /// Twitterが利用できるか？
-    private func canTwitter() {
+    /// ホームタイムラインを取得する
+    private func loadHomeTimeline() {
 
         let manager = LoginManager()
         
         manager.execute().success { account in
-            print("OK")
+            
+            Account.twitter = account
+            HomeTimelineManager().fetch(count: 5).success({ (timeline) -> Void in
+                
+                for tweet in timeline {
+                    print(tweet.text)
+                }
+                
+            }).failure({ (error, isCanceled) in
+                
+                guard let error = error else {
+                    return
+                }
+                
+                print(error)
+            })
+            
         }.failure { (error, isCanceled) in
                 
             guard let _ = error else{
                 return
             }
-            manager.transitTwitterSettings()
+            manager.transitTwitterSettings()            
         }
     }
 }

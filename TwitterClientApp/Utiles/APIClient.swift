@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Eiji Kushida. All rights reserved.
 //
 
-import Alamofire
+import Social
 
 /// APIの処理結果
 ///
@@ -19,26 +19,37 @@ enum Result {
 
 final class APIClient {
     
+    static let baseURLString = "https://api.twitter.com/1.1/"
+    
+    func urlRequest(path: String, parameters: [String: Any]) -> SLRequest{
+        
+        let url = URL(string: APIClient.baseURLString)?.appendingPathComponent(path)
+                
+        let request = SLRequest(
+            forServiceType: SLServiceTypeTwitter,
+            requestMethod: .GET,
+            url: url,
+            parameters: parameters
+        )        
+        request?.account = Account.twitter
+        return request!
+    }
+    
+    
     /// APIをコールする
     ///
     /// - Returns: APIの処理結果
-    func request(router: Router,
-                 completionHandler: @escaping (Result) -> Void = {
-        _ in}) {
+    func request(request: SLRequest,
+                 completionHandler: @escaping (Result) -> Void = { _ in}) {
         
-        Alamofire.request(router).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                completionHandler(Result.success(value))
-                
-            case .failure:
-                
-                if let error = response.result.error {
-                    completionHandler(Result.failure(error))
-                } else {
-                    assertionFailure("エラーのインスタンスがnil")                    
-                }
+        request.perform { data, response, error in
+            if let error = error {
+                completionHandler(.failure(error))
+                return
             }
+            
+            completionHandler(.success(data!))
         }
+        
     }
 }

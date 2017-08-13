@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 final class TimelineTableViewCell: UITableViewCell {
     
@@ -24,6 +25,14 @@ final class TimelineTableViewCell: UITableViewCell {
             nameLabel.text = item?.name
             screenNameLabel.text = item?.screenName
             tweetLabel.text = item?.text
+            
+            guard let profileImageURL = item?.profileImageURL else {
+                return
+            }
+            
+            if let url = URL.init(string: profileImageURL) {
+                iconImageView.af_setImage(withURL: url)
+            }
         }
     }
 }

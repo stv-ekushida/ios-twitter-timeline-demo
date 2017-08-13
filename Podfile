@@ -4,8 +4,8 @@
 target 'TwitterClientApp' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  pod 'Alamofire', '4.2'
   pod 'ObjectMapper', '2.2.1'
+  pod 'AlamofireImage', '3.2.0'
 
   # Pods for TwitterClientApp
 

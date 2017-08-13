@@ -13,15 +13,22 @@ final class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        canTwitter()
+    }
+    
+    /// Twitterが利用できるか？
+    private func canTwitter() {
+
+        let manager = LoginManager()
         
-        LoginManager().execute().success { account in
+        manager.execute().success { account in
             print("OK")
-        }.failure { [weak self] (error, isCanceled) in
-            
-            guard let error = error else{
+        }.failure { (error, isCanceled) in
+                
+            guard let _ = error else{
                 return
             }
-            self?.warning(message: error)
+            manager.transitTwitterSettings()
         }
     }
 }

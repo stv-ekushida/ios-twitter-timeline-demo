@@ -6,6 +6,7 @@ target 'TwitterClientApp' do
   use_frameworks!
   pod 'ObjectMapper', '2.2.1'
   pod 'AlamofireImage', '3.2.0'
+  pod 'STV-Extensions'
 
   # Pods for TwitterClientApp
 

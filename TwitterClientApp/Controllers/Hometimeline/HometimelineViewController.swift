@@ -69,7 +69,8 @@ extension HometimelineViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let tweet = dataSource.tweet(index: indexPath.row)
-        print(tweet.name)
+        let vc = UsertimelineViewController.instance(tweet: tweet)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

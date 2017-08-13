@@ -18,6 +18,7 @@
 		799FE7931F3FF2870097BECB /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799FE7921F3FF2870097BECB /* APIClient.swift */; };
 		799FE7981F3FF73B0097BECB /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799FE7971F3FF73B0097BECB /* LoginManager.swift */; };
 		799FE79A1F3FF76B0097BECB /* SwiftTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799FE7991F3FF76B0097BECB /* SwiftTask.framework */; };
+		799FE79D1F4001780097BECB /* ViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799FE79C1F4001780097BECB /* ViewController+Alert.swift */; };
 		A0AFFD222A393C546F0548A5 /* Pods_TwitterClientApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906210B6F252E45F40EE3CC5 /* Pods_TwitterClientApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 		799FE7921F3FF2870097BECB /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		799FE7971F3FF73B0097BECB /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		799FE7991F3FF76B0097BECB /* SwiftTask.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftTask.framework; path = Carthage/Build/iOS/SwiftTask.framework; sourceTree = "<group>"; };
+		799FE79C1F4001780097BECB /* ViewController+Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+Alert.swift"; sourceTree = "<group>"; };
 		7E3B62A6CFCC68113590DB08 /* Pods_TwitterClientAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwitterClientAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		906210B6F252E45F40EE3CC5 /* Pods_TwitterClientApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwitterClientApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		975A06BD340206FFEACF1C49 /* Pods-TwitterClientAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterClientAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterClientAppTests/Pods-TwitterClientAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,8 +134,8 @@
 			children = (
 				799FE7711F3FF0390097BECB /* Main.storyboard */,
 				799FE76F1F3FF0390097BECB /* ViewController.swift */,
+				799FE79C1F4001780097BECB /* ViewController+Alert.swift */,
 			);
-			name = Controllers;
 			path = Controllers;
 			sourceTree = "<group>";
 		};
@@ -378,6 +380,7 @@
 				799FE7981F3FF73B0097BECB /* LoginManager.swift in Sources */,
 				799FE7701F3FF0390097BECB /* ViewController.swift in Sources */,
 				799FE7901F3FF1150097BECB /* Router.swift in Sources */,
+				799FE79D1F4001780097BECB /* ViewController+Alert.swift in Sources */,
 				799FE76E1F3FF0390097BECB /* AppDelegate.swift in Sources */,
 				799FE7931F3FF2870097BECB /* APIClient.swift in Sources */,
 			);

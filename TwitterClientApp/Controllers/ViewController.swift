@@ -16,8 +16,12 @@ final class ViewController: UIViewController {
         
         LoginManager().execute().success { account in
             print("OK")
-        }.failure { (error, isCanceled) in
-            print(error)
+        }.failure { [weak self] (error, isCanceled) in
+            
+            guard let error = error else{
+                return
+            }
+            self?.warning(message: error)
         }
     }
 }

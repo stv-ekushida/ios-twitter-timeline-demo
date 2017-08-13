@@ -1,5 +1,5 @@
 //
-//  ViewController+Alert.swift
+//  HometimelineViewController+Alert.swift
 //  TwitterClientApp
 //
 //  Created by Eiji Kushida on 2017/08/13.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension ViewController {
+extension HometimelineViewController {
     
     /// 警告用アラート
     ///

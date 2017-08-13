@@ -36,8 +36,7 @@ final class APIClient {
                 if let error = response.result.error {
                     completionHandler(Result.failure(error))
                 } else {
-                    assertionFailure("エラーのインスタンスがnil")
-                    
+                    assertionFailure("エラーのインスタンスがnil")                    
                 }
             }
         }

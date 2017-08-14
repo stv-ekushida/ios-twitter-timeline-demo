@@ -50,15 +50,21 @@ final class HometimelineViewController: UIViewController {
                 guard let error = error else {
                     return
                 }
-                self?.warning(message: error)
+                self?.warning(message: error.description)
             })
             
-        }.failure { (error, _) in
+        }.failure {[weak self] (error, _) in
                 
-            guard let _ = error else{
+            guard let error = error else{
                 return
             }
-            SettingsManager().transitTwitterSettings()
+            
+            switch error {
+            case.notAvailable:
+                SettingsManager().transitTwitterSettings()
+            default:
+                self?.warning(message: error.description)
+            }
         }
     }
 }

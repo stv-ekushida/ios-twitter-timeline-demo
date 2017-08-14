@@ -9,7 +9,23 @@
 import SwiftTask
 import ObjectMapper
 
-typealias TwitterHomeTimelineTask = Task<Void, [Tweet], String>
+typealias TwitterHomeTimelineTask = Task<Void, [Tweet], HometimelineError>
+
+enum HometimelineError: Error {
+    case offline
+    case emptyTimeline
+}
+
+extension HometimelineError: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .offline:
+            return "通信環境の良い場所で再度お試しください。"
+        case .emptyTimeline:
+            return "タイムラインが取得できません。"
+        }
+    }
+}
 
 final class HomeTimelineManager {
     
@@ -22,18 +38,20 @@ final class HomeTimelineManager {
         
         return TwitterHomeTimelineTask { (fulfil, reject) in
             
+            //TODO : オフライン
+            
             let request = APIClient().urlRequest(path: self.path,
                                                  parameters: ["count": "\(count)"])
             
             request.perform { data, response, error in
                 
                 if let error = error {
-                    reject(error.localizedDescription)
+                    reject(error as! HometimelineError)
                     return
                 }
                 
                 guard let data = data else {
-                    reject("ホームタイムラインが取得できません")
+                    reject(HometimelineError.emptyTimeline)
                     return
                 }
                 

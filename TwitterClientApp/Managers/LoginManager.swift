@@ -10,7 +10,26 @@ import Social
 import Accounts
 import SwiftTask
 
-typealias TwitterLoginTask = Task<Void, ACAccount?, String>
+typealias TwitterLoginTask = Task<Void, ACAccount?, LoginError>
+
+enum LoginError: Error {
+    case offline
+    case notAvailable
+    case notApproval
+}
+
+extension LoginError: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .offline:
+            return "通信環境の良い場所で再度お試しください。"
+        case .notAvailable:
+            return "Twitterが利用できません。"
+        case .notApproval:
+            return "Twitterの利用が承認されませんでした。"
+        }
+    }
+}
 
 final class LoginManager {
 
@@ -20,7 +39,7 @@ final class LoginManager {
         return TwitterLoginTask { (fulfil, reject) in
             
             if !SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) {
-                reject("Twitterが利用できません。")
+                reject(LoginError.notAvailable)
                 return
             }
             
@@ -30,7 +49,7 @@ final class LoginManager {
             account.requestAccessToAccounts(with: type, options: nil) { granted, error in
                 
                 guard granted else {
-                    reject("Twitterの利用が承認されませんでした。")
+                    reject(LoginError.notApproval)
                     return
                 }
                 

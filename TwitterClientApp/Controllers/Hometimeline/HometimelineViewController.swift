@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftTask
+import SVProgressHUD
 
 final class HometimelineViewController: UIViewController, Timelinable {
     
@@ -34,6 +35,8 @@ final class HometimelineViewController: UIViewController, Timelinable {
     
     /// ホームタイムラインを取得する
     internal func loadTimeline() {
+        
+        SVProgressHUD.show()
         
         LoginManager().execute().success { account in
             
@@ -65,6 +68,8 @@ final class HometimelineViewController: UIViewController, Timelinable {
             default:
                 self?.warning(message: error.description)
             }
+        }.then {(_, _) -> Void in
+            SVProgressHUD.dismiss()
         }
     }
 }

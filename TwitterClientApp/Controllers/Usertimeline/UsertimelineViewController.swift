@@ -9,6 +9,7 @@
 import UIKit
 import SwiftTask
 import STV_Extensions
+import SVProgressHUD
 
 final class UsertimelineViewController: UIViewController, Timelinable {
     
@@ -48,6 +49,7 @@ final class UsertimelineViewController: UIViewController, Timelinable {
     
     /// ユーザタイムラインの習得
     internal func loadTimeline() {
+        SVProgressHUD.show()
         
         UserTimelineManager().fetch(screenName: tweet.screenName, count: 30)
             .success {[weak self] timeline  in
@@ -62,6 +64,8 @@ final class UsertimelineViewController: UIViewController, Timelinable {
                 return
             }
             self?.warning(message: error.description)
+        }.then { (_, _) -> Void in
+            SVProgressHUD.dismiss()
         }
     }
 }

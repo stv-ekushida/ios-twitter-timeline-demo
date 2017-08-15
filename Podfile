@@ -8,6 +8,7 @@ target 'TwitterClientApp' do
   pod 'AlamofireImage', '3.2.0'
   pod 'STV-Extensions'
   pod 'ReachabilitySwift'
+  pod 'SVProgressHUD'
 
   # Pods for TwitterClientApp
 

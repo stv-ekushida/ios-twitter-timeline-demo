@@ -5,12 +5,14 @@ PODS:
   - ObjectMapper (2.2.1)
   - ReachabilitySwift (3)
   - STV-Extensions (0.1.9)
+  - SVProgressHUD (2.1.2)
 
 DEPENDENCIES:
   - AlamofireImage (= 3.2.0)
   - ObjectMapper (= 2.2.1)
   - ReachabilitySwift
   - STV-Extensions
+  - SVProgressHUD
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
@@ -18,7 +20,8 @@ SPEC CHECKSUMS:
   ObjectMapper: 41e43e1a89f8060ef5ea5d04ba852e269a621d68
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   STV-Extensions: 48b4788afd374c6940a20f9eea6b1b9ebd40fe1c
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: 5996fd00fa07ebf737c5847a04a089c782d341fe
+PODFILE CHECKSUM: cd548b268d0acda6656dd243f8803b44ae5624ab
 
 COCOAPODS: 1.2.1

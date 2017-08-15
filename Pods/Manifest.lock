@@ -3,19 +3,22 @@ PODS:
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
   - ObjectMapper (2.2.1)
+  - ReachabilitySwift (3)
   - STV-Extensions (0.1.9)
 
 DEPENDENCIES:
   - AlamofireImage (= 3.2.0)
   - ObjectMapper (= 2.2.1)
+  - ReachabilitySwift
   - STV-Extensions
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   ObjectMapper: 41e43e1a89f8060ef5ea5d04ba852e269a621d68
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   STV-Extensions: 48b4788afd374c6940a20f9eea6b1b9ebd40fe1c
 
-PODFILE CHECKSUM: e53eab395119188f6fef3ebb81e20d13c1253d53
+PODFILE CHECKSUM: 5996fd00fa07ebf737c5847a04a089c782d341fe
 
 COCOAPODS: 1.2.1

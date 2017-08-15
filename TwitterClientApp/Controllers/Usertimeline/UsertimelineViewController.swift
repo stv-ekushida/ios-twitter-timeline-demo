@@ -10,7 +10,6 @@ import UIKit
 import SwiftTask
 import STV_Extensions
 
-
 final class UsertimelineViewController: UIViewController {
     
     var tweet: Tweet!
@@ -30,5 +29,12 @@ final class UsertimelineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = tweet.name
+        
+        
+        UserTimelineManager().fetch(userId: tweet.id, count: 30).success { tweet  in
+            
+        }.failure { (error, _) in
+            
+        }
     }
 }

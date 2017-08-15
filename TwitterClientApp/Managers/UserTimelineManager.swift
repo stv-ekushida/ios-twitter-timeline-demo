@@ -1,22 +1,22 @@
 //
-//  HomeTimelineManager.swift
+//  UserTimelineManager.swift
 //  TwitterClientApp
 //
-//  Created by Eiji Kushida on 2017/08/13.
+//  Created by Eiji Kushida on 2017/08/14.
 //  Copyright © 2017年 Eiji Kushida. All rights reserved.
 //
 
 import SwiftTask
 import ObjectMapper
 
-typealias TwitterHomeTimelineTask = Task<Void, [Tweet], HometimelineError>
+typealias TwitterUserTimelineTask = Task<Void, [Tweet], UsertimelineError>
 
-enum HometimelineError: Error {
+enum UsertimelineError: Error {
     case offline
     case emptyTimeline
 }
 
-extension HometimelineError: CustomStringConvertible {
+extension UsertimelineError: CustomStringConvertible {
     var description: String {
         switch self {
         case .offline:
@@ -27,34 +27,36 @@ extension HometimelineError: CustomStringConvertible {
     }
 }
 
-final class HomeTimelineManager {
+final class UserTimelineManager {
     
-    let path = "statuses/home_timeline.json"
+    let path = "statuses/user_timeline.json"
     
-    /// ホームタイムライン情報を取得する
+    /// ユーザタイムライン情報を取得する
     ///
-    /// - Returns: ホームタイムライン情報
-    func fetch(count: Int) -> TwitterHomeTimelineTask{
+    /// - Returns: ユーザタイムライン情報
+    func fetch(userId: String, count: Int) -> TwitterUserTimelineTask{
         
-        return TwitterHomeTimelineTask { (fulfil, reject) in
+        return TwitterUserTimelineTask { (fulfil, reject) in
             
             guard NetworkManager().canNetwork() else {
-                reject(HometimelineError.offline)
+                reject(UsertimelineError.offline)
                 return
             }
-                        
+            
             let request = APIClient().urlRequest(path: self.path,
-                                                 parameters: ["count": "\(count)"])
+                                                 parameters: [
+                                                    "user_id": userId,
+                                                    "count": "\(count)"])
             
             request.perform { data, response, error in
                 
                 if let error = error {
-                    reject(error as! HometimelineError)
+                    reject(error as! UsertimelineError)
                     return
                 }
                 
                 guard let data = data else {
-                    reject(HometimelineError.emptyTimeline)
+                    reject(UsertimelineError.emptyTimeline)
                     return
                 }
                 
@@ -72,4 +74,3 @@ final class HomeTimelineManager {
         }
     }
 }
-

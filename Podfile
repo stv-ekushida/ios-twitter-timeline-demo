@@ -7,6 +7,7 @@ target 'TwitterClientApp' do
   pod 'ObjectMapper', '2.2.1'
   pod 'AlamofireImage', '3.2.0'
   pod 'STV-Extensions'
+  pod 'ReachabilitySwift'
 
   # Pods for TwitterClientApp
 

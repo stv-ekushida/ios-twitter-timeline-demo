@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Accounts
 @testable import TwitterClientApp
 
 class APIClientTests: XCTestCase {

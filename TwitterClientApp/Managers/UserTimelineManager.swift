@@ -34,7 +34,7 @@ final class UserTimelineManager {
     /// ユーザタイムライン情報を取得する
     ///
     /// - Returns: ユーザタイムライン情報
-    func fetch(userId: String, count: Int) -> TwitterUserTimelineTask{
+    func fetch(screenName: String, count: Int) -> TwitterUserTimelineTask{
         
         return TwitterUserTimelineTask { (fulfil, reject) in
             
@@ -45,7 +45,7 @@ final class UserTimelineManager {
             
             let request = APIClient().urlRequest(path: self.path,
                                                  parameters: [
-                                                    "user_id": userId,
+                                                    "screen_name": screenName,
                                                     "count": "\(count)"])
             
             request.perform { data, response, error in

@@ -10,9 +10,14 @@ import UIKit
 import SwiftTask
 import STV_Extensions
 
-final class UsertimelineViewController: UIViewController {
+final class UsertimelineViewController: UIViewController, Timelinable {
     
-    var tweet: Tweet!
+    //MARK:- IBOutlet    
+    @IBOutlet weak var timelineTableView: UITableView!
+    
+    //MARK: - Properties
+    fileprivate let dataSource = TimeLineProvider()
+    private var tweet: Tweet!
     
     /// ユーザタイムライン画面のインスタンスを取得する
     ///
@@ -20,21 +25,41 @@ final class UsertimelineViewController: UIViewController {
     /// - Returns: ユーザタイムライン画面ののインスタンス
     static func instance(tweet: Tweet) -> UsertimelineViewController {
         
-        let vc = UIStoryboard.viewController(storyboardName: "Usertimeline", identifier: "UsertimelineViewController") as! UsertimelineViewController
-
+        let vc = UIStoryboard.viewController(storyboardName: "Usertimeline",
+                                             identifier: "UsertimelineViewController") as! UsertimelineViewController
         vc.tweet = tweet
         return vc
     }
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+        loadTimeline()
+    }
+    
+    //MARK: - Internal Methods
+    internal func setup() {
         self.title = tweet.name
+        timelineTableView.estimatedRowHeight = 88
+        timelineTableView.rowHeight = UITableViewAutomaticDimension
+        timelineTableView.dataSource = dataSource
+    }
+    
+    /// ユーザタイムラインの習得
+    internal func loadTimeline() {
         
-        
-        UserTimelineManager().fetch(userId: tweet.id, count: 30).success { tweet  in
+        UserTimelineManager().fetch(screenName: tweet.screenName, count: 30)
+            .success {[weak self] timeline  in
+            
+            DispatchQueue.main.async {
+                self?.dataSource.set(tweets: timeline)
+                self?.timelineTableView.reloadData()
+            }
+
             
         }.failure { (error, _) in
-            
+                
         }
     }
 }

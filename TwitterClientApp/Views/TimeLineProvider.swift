@@ -1,5 +1,5 @@
 //
-//  HometimeLineProvider.swift
+//  TimeLineProvider.swift
 //  TwitterClientApp
 //
 //  Created by Eiji Kushida on 2017/08/13.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class HometimeLineProvider: NSObject {
+final class TimeLineProvider: NSObject {
     
     fileprivate var tweets = [Tweet]()
     
@@ -22,7 +22,7 @@ final class HometimeLineProvider: NSObject {
 }
 
 //MARK : - UITableViewDataSource
-extension HometimeLineProvider: UITableViewDataSource {
+extension TimeLineProvider: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {

@@ -9,23 +9,23 @@
 import UIKit
 import SwiftTask
 
-final class HometimelineViewController: UIViewController {
+final class HometimelineViewController: UIViewController, Timelinable {
     
     //MARK:- IBOutlet
     @IBOutlet weak var timelineTableView: UITableView!
     
     //MARK: - Properties
-    fileprivate let dataSource = HometimeLineProvider()
+    fileprivate let dataSource = TimeLineProvider()
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTimeLine()
-        loadHomeTimeline()
+        setup()
+        loadTimeline()
     }
     
     //MARK: - Private Methods
-    private func setupTimeLine() {
+    internal func setup() {
         timelineTableView.estimatedRowHeight = 88
         timelineTableView.rowHeight = UITableViewAutomaticDimension
         timelineTableView.dataSource = dataSource
@@ -33,7 +33,7 @@ final class HometimelineViewController: UIViewController {
     }
     
     /// ホームタイムラインを取得する
-    private func loadHomeTimeline() {
+    internal func loadTimeline() {
         
         LoginManager().execute().success { account in
             

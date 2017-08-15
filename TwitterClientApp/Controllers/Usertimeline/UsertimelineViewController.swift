@@ -55,11 +55,13 @@ final class UsertimelineViewController: UIViewController, Timelinable {
             DispatchQueue.main.async {
                 self?.dataSource.set(tweets: timeline)
                 self?.timelineTableView.reloadData()
-            }
-
+            }            
+        }.failure {[weak self] (error, _) in
             
-        }.failure { (error, _) in
-                
+            guard let error = error else{
+                return
+            }
+            self?.warning(message: error.description)
         }
     }
 }

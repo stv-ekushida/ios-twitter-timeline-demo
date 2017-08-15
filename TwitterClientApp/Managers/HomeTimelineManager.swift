@@ -48,8 +48,8 @@ final class HomeTimelineManager {
             
             request.perform { data, response, error in
                 
-                if let error = error {
-                    reject(error as! HometimelineError)
+                if let _ = error {
+                    assertionFailure("APIエラーが発生しました。")
                     return
                 }
                 

@@ -50,8 +50,8 @@ final class UserTimelineManager {
             
             request.perform { data, response, error in
                 
-                if let error = error {
-                    reject(error as! UsertimelineError)
+                if let _ = error {
+                    assertionFailure("APIエラーが発生しました。")
                     return
                 }
                 

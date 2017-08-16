@@ -17,6 +17,9 @@ final class IconImageManager {
     /// - Parameter model: アイコン画像情報
     static func add(model: IconImage) {
         
+        if let _ = IconImageManager.findByID(profileId: model.profileId) {
+            return
+        }
         let object = IconImage()
         object.profileId = model.profileId
         object.iconImageData = model.iconImageData

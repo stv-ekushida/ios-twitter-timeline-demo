@@ -26,12 +26,29 @@ final class TimelineTableViewCell: UITableViewCell {
             screenNameLabel.text = item?.screenName
             tweetLabel.text = item?.text
             
+            guard let profileId = item?.id else {
+                assertionFailure("プロフィールIDが設定されていない")
+                return
+            }
+
+            if let iconImage = IconImageManager.findByID(profileId: profileId),
+                let data = iconImage.iconImageData {
+                iconImageView.image = UIImage(data: data)
+                return
+            }
+            
             guard let profileImageURL = item?.profileImageURL else {
+                assertionFailure("プロフィールアイコンが設定されていない")
                 return
             }
             
             if let url = URL.init(string: profileImageURL) {
-                iconImageView.af_setImage(withURL: url)
+                iconImageView.af_setImage(withURL: url , completion: { data in
+                    let savedIconImage = IconImage()
+                    savedIconImage.profileId = profileId
+                    savedIconImage.iconImageData = data.data
+                    IconImageManager.add(model: savedIconImage)
+                })
             }
         }
     }

@@ -9,6 +9,7 @@ target 'TwitterClientApp' do
   pod 'STV-Extensions'
   pod 'ReachabilitySwift'
   pod 'SVProgressHUD'
+  pod 'RealmSwift', '<= 2.8.0'
 
   # Pods for TwitterClientApp
 
